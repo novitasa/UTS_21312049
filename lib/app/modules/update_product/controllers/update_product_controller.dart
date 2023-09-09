@@ -3,32 +3,52 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UpdateProductController extends GetxController {
+  late TextEditingController cAlamat;
+  late TextEditingController cJk;
   late TextEditingController cNama;
-  late TextEditingController cHarga;
+  late TextEditingController cNpm;
+  late TextEditingController cProgram_studi;
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  get alamat => null;
+
+  get jk => null;
+
+  get npm => null;
+
+  get program_studi => null;
+
   Future<DocumentSnapshot<Object?>> getData(String id) async {
-    DocumentReference docRef = firestore.collection("products").doc(id);
+    DocumentReference docRef = firestore.collection("mahasiswa").doc(id);
 
     return docRef.get();
   }
 
   void updateProduct(String nama, String harga, String id) async {
-    DocumentReference productById = firestore.collection("products").doc(id);
+    DocumentReference productById = firestore.collection("mahasiswa").doc(id);
 
     try {
       await productById.update({
-        "name": nama,
-        "price": harga,
+        "alamat": alamat,
+        "jk": jk,
+        "nama": nama,
+        "npm": npm,
+        "program_studi": program_studi,
       });
 
       Get.defaultDialog(
         title: "Berhasil",
         middleText: "berhasil menambahkan data product.",
         onConfirm: () {
+          cAlamat.clear();
+          cJk.clear();
           cNama.clear();
-          cHarga.clear();
+          cNpm.clear();
+          cProgram_studi.clear();
+          Get.back();
+          Get.back();
+          Get.back();
           Get.back();
           Get.back();
         },
@@ -46,16 +66,25 @@ class UpdateProductController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
+    cAlamat = TextEditingController();
+    cJk = TextEditingController();
     cNama = TextEditingController();
-    cHarga = TextEditingController();
+    cNpm = TextEditingController();
+    cProgram_studi = TextEditingController();
     super.onInit();
   }
 
   @override
   void onClose() {
     // TODO: implement onClose
+    cAlamat.dispose();
+    cJk.dispose();
     cNama.dispose();
-    cHarga.dispose();
+    cNpm.dispose();
+    cProgram_studi.dispose();
     super.onClose();
   }
+
+  updateMahasiswa(String text, String text2, String text3, String text4,
+      String text5, arguments) async {}
 }

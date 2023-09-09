@@ -62,6 +62,17 @@ class LoginView extends GetView<LoginController> {
                 )
               ],
             ),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () => cAuth.LoginGoogle(),
+              child: Text("Login white Google"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.yellow,
+                foregroundColor: Colors.white,
+              ),
+            ),
           ],
         ),
       ),
